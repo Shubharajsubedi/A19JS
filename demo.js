@@ -1,62 +1,51 @@
-const arr1 = [-3,-2,-1];
-const arr2 = [0,1,2,3];
+const customer = [
+    {customerid : 1, name: 'John Doe', bought :[{id:2, name: 'Laptop', price: 1200}, {id:6, name: 'Mouse', price: 25}]},
+    {customerid : 2, name: 'Asmit', bought :[{id:2, name: 'Laptop', price: 1200}, {id:7, name: 'Cat', price: 25}]},
+    {customerid : 3, name: 'Tripal', bought :[{id:3, name: 'Keyboard', price: 1200}, {id:8, name: 'House', price: 25}]},
+    {customerid : 4, name: 'Saroj', bought :[{id:4, name: 'touchpad', price: 1200}, {id:9, name: 'Land', price: 25}]},
+    {customerid : 5, name: 'Aatish', bought :[{id:4, name: 'touchpad', price: 1200}, {id:10, name: 'TV', price: 25}]},
+]
 
-const addArrays = (arr1, arr2) => {
-    const result = [...arr1,...arr2];
-    return result;
-}
+const customerAPIresponse = {
+    status: 200,
+    message: "Customer data fetched successfully",
+    data: customer
+};
 
-const addArrayV2 = () => [...arr1, ...arr2];
-// console.log(addArrays()); // [-3, -2, -1, 0, 1, 2, 3]
+const getproductname = ()=>{
+    if (customerAPIresponse.status ===200){
+        let boughtProducts = [];
+        customerAPIresponse.data.forEach((customer)=>{
+            customer.bought.map((item)=>{
+                boughtProducts.unshift(item.name)
+            })
+        });
+        return boughtProducts;
+    }
+};
 
-const userData = {
-    name: "shubharaj subedi",
-    age: 22,
-    email: "shubharajsubedi8@gmail.com",
-    address: "Kathmandu",
-    phone: null,
-    isActive: false,
-    hobbies: undefined
-}
+console.log(getproductname());
 
+const data = {
+    laptop: 2,
+    keyboard: 1,
+    touchpad:2
+};
 
-const apiRouter = {
-    status: 404,
-    message:"not found",
-    data:{}
-}
-
-const thisisFinalUderData ={}
-const populationData = ()=>  {
-    if (apiRouter.status === 200) {
-       thisisFinalUderData = apiRouter
-    }else{
-        thisisFinalUderData=userData
+const getproductcount = (productName) => {
+    if (customerAPIresponse.status === 200) {
+        let productCount = {};
+        customerAPIresponse.data.forEach((customer) => {
+            customer.bought.map((item) => {
+                if (productCount[item.id]) {
+                    productCount[item.name]+=1;
+                }else{
+                    productCount[item.name] = 1;
+                }
+            });
+        });
+        return productCount;
     }
 }
 
-console.log(populationData()); // { name: 'shubharaj subedi', age: 22, email: '
-
-    // const filterFalsyValues =()=> {
-    //     const finalUserData = {}
-    //     for (let key in userData) {
-    //         if (userData[key]) {
-    //             finalUserData[key] = userData[key];
-    //         }
-            
-    //     }
-    //     return finalUserData;
-    // }
-
-
-// console.log(filterFalsyValues()); // { name: 'shubharaj subedi', age: 22, email: '
-
-
-
-
-
-
-
-
-
-
+console.log(getproductcount()); 
