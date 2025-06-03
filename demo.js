@@ -5,7 +5,7 @@ const customer = [
     {customerid : 4, name: 'Saroj', bought :[{id:4, name: 'touchpad', price: 1200}, {id:9, name: 'Land', price: 25}]},
     {customerid : 5, name: 'Aatish', bought :[{id:4, name: 'touchpad', price: 1200}, {id:10, name: 'TV', price: 25}]},
 ]
-
+console.log("new feature addedS")
 const customerAPIresponse = {
     status: 200,
     message: "Customer data fetched successfully",
